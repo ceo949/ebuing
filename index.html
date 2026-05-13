@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ebuing - Smart home e domotica per host Airbnb e privati. Configura il tuo kit risparmio energia gratis e ricevi un preventivo personalizzato.">
+<meta name="theme-color" content="#2E7D5B">
+<title>ebuing - La tua casa smart. La tua bolletta leggera.</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+<div class="container header-inner">
+<img src="logo.png" alt="ebuing - smart home e domotica" class="logo">
+</div>
+</header>
+
+<section class="hero">
+<div class="container">
+<h1 class="hero-title">La tua casa smart.<br><span class="hero-title-accent">La tua bolletta leggera.</span></h1>
+<p class="hero-subtitle">Kit di domotica selezionati per ridurre i consumi di casa e degli appartamenti in affitto breve. Configura il tuo kit e ricevi un preventivo personalizzato gratuito.</p>
+<a href="#configuratore" class="btn-primary">Configura il tuo kit gratis →</a>
+</div>
+</section>
+
+<section class="problem">
+<div class="container">
+<h2 class="section-title">Il problema delle bollette estive</h2>
+<div class="problem-grid">
+<div class="problem-card">
+<div class="problem-number">+45%</div>
+<p>L'aumento medio delle bollette italiane dal 2022 a oggi.</p>
+</div>
+<div class="problem-card">
+<div class="problem-number">€300/anno</div>
+<p>Il costo medio dell'AC lasciato acceso dagli ospiti dopo il check-out, per appartamento.</p>
+</div>
+<div class="problem-card">
+<div class="problem-number">8 ore</div>
+<p>Il tempo medio in cui aria condizionata e luci restano accese inutilmente tra un ospite e l'altro.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="solution">
+<div class="container">
+<h2 class="section-title">La soluzione ebuing</h2>
+<p class="section-subtitle">Un sistema domotico selezionato per chi vuole un risultato concreto: una casa che si gestisce da sola e una bolletta più leggera.</p>
+<div class="solution-grid">
+<div class="solution-card">
+<div class="solution-icon">●</div>
+<h3>Rileva</h3>
+<p>Sensori intelligenti rilevano la presenza in casa e le condizioni ambientali in tempo reale.</p>
+</div>
+<div class="solution-card">
+<div class="solution-icon">●</div>
+<h3>Decide</h3>
+<p>L'hub centrale elabora i dati e attiva automazioni personalizzate in base alle tue regole.</p>
+</div>
+<div class="solution-card">
+<div class="solution-icon">●</div>
+<h3>Spegne</h3>
+<p>Condizionatori e luci si spengono automaticamente quando l'appartamento è vuoto.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="configuratore" class="configurator">
+<div class="container">
+<h2 class="section-title">Configura il tuo kit</h2>
+<p class="section-subtitle">Rispondi a poche domande e ricevi un preventivo personalizzato gratuito.</p>
+
+<div class="configurator-box">
+
+<div class="progress-bar">
+<div class="progress-fill" id="progressFill"></div>
+</div>
+
+<div class="step active" data-step="1">
+<h3 class="step-title">1. Chi sei?</h3>
+<div class="options">
+<label class="option-card">
+<input type="radio" name="tipo" value="host" required>
+<span class="option-content">
+<strong>Host Airbnb / B&B</strong>
+<small>Gestisco uno o più appartamenti in affitto breve</small>
+</span>
+</label>
+<label class="option-card">
+<input type="radio" name="tipo" value="privato" required>
+<span class="option-content">
+<strong>Privato</strong>
+<small>Casa mia o seconda casa</small>
+</span>
+</label>
+</div>
+<div class="step-nav">
+<button type="button" class="btn-secondary" onclick="goToStep(2)" id="btnNext1" disabled>Avanti →</button>
+</div>
+</div>
+
+<div class="step" data-step="2">
+<h3 class="step-title">2. Dimensione dell'appartamento</h3>
+<div class="options">
+<label class="option-card"><input type="radio" name="dimensione" value="fino-50"><span class="option-content"><strong>Fino a 50 m²</strong><small>Monolocale o piccolo bilocale</small></span></label>
+<label class="option-card"><input type="radio" name="dimensione" value="50-80"><span class="option-content"><strong>50-80 m²</strong><small>Bilocale o trilocale</small></span></label>
+<label class="option-card"><input type="radio" name="dimensione" value="80-120"><span class="option-content"><strong>80-120 m²</strong><small>Casa media</small></span></label>
+<label class="option-card"><input type="radio" name="dimensione" value="oltre-120"><span class="option-content"><strong>Oltre 120 m²</strong><small>Casa grande o multipiano</small></span></label>
+</div>
+<div class="step-nav">
+<button type="button" class="btn-outline" onclick="goToStep(1)">← Indietro</button>
+<button type="button" class="btn-secondary" onclick="goToStep(3)" id="btnNext2" disabled>Avanti →</button>
+</div>
+</div>
+
+<div class="step" data-step="3">
+<h3 class="step-title">3. Cosa vuoi controllare automaticamente?</h3>
+<p class="step-subtitle">Seleziona tutte le funzionalità che ti interessano. Vedi sotto il risparmio stimato.</p>
+<div class="features">
+<label class="feature-card"><input type="checkbox" name="feature" value="ac" data-saving="230"><span class="feature-text"><strong>Spegnere il condizionatore quando la casa è vuota</strong><small>Risparmio stimato: <em>€230/anno</em></small></span></label>
+<label class="feature-card"><input type="checkbox" name="feature" value="luci" data-saving="60"><span class="feature-text"><strong>Spegnere luci dimenticate accese</strong><small>Risparmio stimato: <em>€60/anno</em></small></span></label>
+<label class="feature-card"><input type="checkbox" name="feature" value="standby" data-saving="80"><span class="feature-text"><strong>Monitorare consumi elettrodomestici</strong><small>Risparmio stimato: <em>€80/anno</em></small></span></label>
+<label class="feature-card"><input type="checkbox" name="feature" value="riscaldamento" data-saving="180"><span class="feature-text"><strong>Controllo temperatura per ogni stanza</strong><small>Risparmio stimato: <em>€180/anno</em> (inverno)</small></span></label>
+<label class="feature-card"><input type="checkbox" name="feature" value="tv" data-saving="40"><span class="feature-text"><strong>Spegnere TV/decoder in standby</strong><small>Risparmio stimato: <em>€40/anno</em></small></span></label>
+<label class="feature-card"><input type="checkbox" name="feature" value="voce" data-saving="0"><span class="feature-text"><strong>Comando vocale Alexa/Google Home</strong><small>Comfort aggiunto</small></span></label>
+<label class="feature-card"><input type="checkbox" name="feature" value="remoto" data-saving="0"><span class="feature-text"><strong>Controllo remoto da app</strong><small>Gestione da ovunque</small></span></label>
+</div>
+<div class="saving-summary" id="savingSummary">
+<span>Risparmio stimato totale</span>
+<strong><span id="savingAmount">€0</span>/anno</strong>
+</div>
+<div class="step-nav">
+<button type="button" class="btn-outline" onclick="goToStep(2)">← Indietro</button>
+<button type="button" class="btn-secondary" onclick="goToStep(4)" id="btnNext3">Avanti →</button>
+</div>
+</div>
+
+<div class="step" data-step="4">
+<h3 class="step-title">4. Ricevi il tuo preventivo</h3>
+<p class="step-subtitle">Lascia i tuoi contatti per ricevere il preventivo personalizzato gratuito.</p>
+<form id="leadForm" action="https://formspree.io/f/XXXXXXXX" method="POST">
+<input type="hidden" name="_subject" value="Nuova richiesta preventivo ebuing">
+<input type="hidden" name="tipo_cliente" id="hiddenTipo">
+<input type="hidden" name="dimensione" id="hiddenDimensione">
+<input type="hidden" name="funzionalita" id="hiddenFeatures">
+<input type="hidden" name="risparmio_stimato" id="hiddenSaving">
+
+<div class="form-row"><label for="nome">Nome e cognome *</label><input type="text" id="nome" name="nome" required></div>
+<div class="form-row"><label for="email">Email *</label><input type="email" id="email" name="email" required></div>
+<div class="form-row"><label for="telefono">Telefono (opzionale)</label><input type="tel" id="telefono" name="telefono"></div>
+<div class="form-row"><label for="citta">Città *</label><input type="text" id="citta" name="citta" required></div>
+<div class="form-row"><label for="note">Note (opzionale)</label><textarea id="note" name="note" rows="3" placeholder="Hai esigenze particolari? Scrivile qui."></textarea></div>
+
+<label class="checkbox-row">
+<input type="checkbox" name="consenso" required>
+<span>Acconsento al trattamento dei miei dati personali per ricevere il preventivo e comunicazioni relative al lancio del kit. Leggi la <a href="privacy.html" target="_blank">Privacy Policy</a>.</span>
+</label>
+
+<div class="step-nav">
+<button type="button" class="btn-outline" onclick="goToStep(3)">← Indietro</button>
+<button type="submit" class="btn-primary">Richiedi preventivo gratuito</button>
+</div>
+</form>
+</div>
+
+<div class="step thank-you" data-step="5">
+<div class="thank-you-icon">✓</div>
+<h3>Grazie!</h3>
+<p>Abbiamo ricevuto la tua richiesta. Stiamo preparando il tuo preventivo personalizzato e te lo invieremo via email entro 48 ore.</p>
+<p>Per qualsiasi domanda, scrivici a <a href="mailto:info@ebuing.it">info@ebuing.it</a></p>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="how-it-works">
+<div class="container">
+<h2 class="section-title">Come funziona</h2>
+<div class="how-grid">
+<div class="how-step"><div class="how-number">1</div><h3>Configuri</h3><p>Rispondi alle domande del configuratore. Bastano 2 minuti.</p></div>
+<div class="how-step"><div class="how-number">2</div><h3>Ricevi preventivo</h3><p>Ti inviamo un preventivo personalizzato gratuito via email entro 48 ore.</p></div>
+<div class="how-step"><div class="how-number">3</div><h3>Ricevi il kit</h3><p>Se decidi di procedere, ti spediamo il kit completo a casa.</p></div>
+</div>
+</div>
+</section>
+
+<section class="faq">
+<div class="container">
+<h2 class="section-title">Domande frequenti</h2>
+<div class="faq-list">
+
+<details class="faq-item"><summary>Devo pagare per ricevere il preventivo?</summary><p>No. Il preventivo è completamente gratuito e senza impegno di acquisto. Vogliamo prima capire quale kit è giusto per te.</p></details>
+
+<details class="faq-item"><summary>Quanto tempo serve per installare il kit?</summary><p>L'installazione del kit base richiede circa 30-45 minuti la prima volta. Forniamo guida cartacea italiana inclusa nella confezione e video tutorial online. Non serve elettricista per il kit base.</p></details>
+
+<details class="faq-item"><summary>Funziona con il mio condizionatore?</summary><p>Il kit funziona con condizionatori dotati di presa elettrica standard (portatili o split con presa esterna). Per split fissi senza presa esterna, l'hub centrale ha un trasmettitore IR integrato che può comandare i climatizzatori tramite telecomando.</p></details>
+
+<details class="faq-item"><summary>Posso espandere il kit in futuro?</summary><p>Sì, tutti i kit sono espandibili. Puoi aggiungere sensori, prese smart, lampadine smart e valvole termostatiche in qualsiasi momento. L'hub centrale supporta fino a 128 dispositivi.</p></details>
+
+<details class="faq-item"><summary>Tempi e modalità di consegna?</summary><p>I prodotti vengono spediti da magazzino EU. La spedizione standard avviene in 5-15 giorni lavorativi. Per ordini sopra €100 la spedizione è gratuita.</p></details>
+
+<details class="faq-item"><summary>Posso rendere il prodotto se non sono soddisfatto?</summary><p>Sì, hai 14 giorni di diritto di recesso secondo la legge italiana. Se entro 14 giorni dalla consegna decidi di rendere il kit, ti rimborsiamo l'intero importo.</p></details>
+
+<details class="faq-item"><summary>Quanto è il risparmio reale?</summary><p>Il risparmio dipende dall'uso e dalle abitudini. I valori indicati nel configuratore sono basati su tariffe ARERA 2026 e consumi medi di appartamenti italiani. Su un appartamento Airbnb tipico, il kit base si ripaga in circa 2-3 mesi durante la stagione estiva.</p></details>
+
+<details class="faq-item"><summary>Funziona con Alexa, Google Home, Apple HomeKit?</summary><p>Sì. Il kit è compatibile con tutti i principali assistenti vocali (Alexa, Google Home, Apple HomeKit, SmartThings). La configurazione richiede WiFi 2.4 GHz attivo nell'appartamento.</p></details>
+
+</div>
+</div>
+</section>
+
+<footer class="footer">
+<div class="container">
+<div class="footer-grid">
+<div>
+<img src="logo.png" alt="ebuing" class="footer-logo">
+<p class="footer-tagline">La tua casa smart.<br>La tua bolletta leggera.</p>
+</div>
+<div>
+<h4>Contatti</h4>
+<p><a href="mailto:info@ebuing.it">info@ebuing.it</a></p>
+</div>
+<div>
+<h4>Informazioni</h4>
+<p>Nuova Elettronica S.r.l.<br>P.IVA 12220630011<br>Avigliana (TO), Italia</p>
+</div>
+<div>
+<h4>Legale</h4>
+<p><a href="privacy.html">Privacy Policy</a></p>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2026 ebuing - Nuova Elettronica S.r.l. Tutti i diritti riservati.</p>
+</div>
+</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
