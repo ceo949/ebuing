@@ -51,20 +51,14 @@ function resetConfigurator() {
   document.querySelectorAll('input[name="tipo"]').forEach(i => i.checked = false);
   document.querySelectorAll('input[name="dimensione"]').forEach(i => i.checked = false);
   document.querySelectorAll('input[name="feature"]').forEach(i => i.checked = false);
-  
   document.getElementById('leadForm').reset();
-  
   document.getElementById('savingAmount').textContent = '€0';
-  
   document.getElementById('btnNext1').disabled = true;
   document.getElementById('btnNext2').disabled = true;
-  
   const newRequestBtn = document.getElementById('newRequestBtn');
   if (newRequestBtn) newRequestBtn.style.display = 'none';
-  
   const countdownEl = document.getElementById('countdownMsg');
   if (countdownEl) countdownEl.style.display = 'block';
-  
   goToStep(1);
 }
 
