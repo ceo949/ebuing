@@ -23,7 +23,7 @@
 <section class="hero">
 <div class="container">
 <h1 class="hero-title">La tua casa smart.<br><span class="hero-title-accent">La tua bolletta leggera.</span></h1>
-<p class="hero-subtitle">Kit di domotica selezionati per ridurre i consumi di casa e degli appartamenti in affitto breve. Configura il tuo kit e ricevi un preventivo personalizzato gratuito.</p>
+<p class="hero-subtitle">Kit di domotica selezionati per ridurre i consumi di casa e degli appartamenti in affitto breve. Configura il tuo kit, ricevi la proposta personalizzata e scegli se procedere.</p>
 <a href="#configuratore" class="btn-primary">Configura il tuo kit gratis →</a>
 </div>
 </section>
@@ -75,7 +75,7 @@
 <section id="configuratore" class="configurator">
 <div class="container">
 <h2 class="section-title">Configura il tuo kit</h2>
-<p class="section-subtitle">Rispondi a poche domande e ricevi un preventivo personalizzato gratuito.</p>
+<p class="section-subtitle">Rispondi a poche domande e ricevi la proposta personalizzata.</p>
 
 <div class="configurator-box">
 
@@ -127,7 +127,6 @@
 <label class="feature-card"><input type="checkbox" name="feature" value="ac" data-saving="230"><span class="feature-text"><strong>Spegnere il condizionatore quando la casa è vuota</strong><small>Risparmio stimato: <em>€230/anno</em></small></span></label>
 <label class="feature-card"><input type="checkbox" name="feature" value="luci" data-saving="60"><span class="feature-text"><strong>Spegnere luci dimenticate accese</strong><small>Risparmio stimato: <em>€60/anno</em></small></span></label>
 <label class="feature-card"><input type="checkbox" name="feature" value="standby" data-saving="80"><span class="feature-text"><strong>Monitorare consumi elettrodomestici</strong><small>Risparmio stimato: <em>€80/anno</em></small></span></label>
-<label class="feature-card"><input type="checkbox" name="feature" value="riscaldamento" data-saving="180"><span class="feature-text"><strong>Controllo temperatura per ogni stanza</strong><small>Risparmio stimato: <em>€180/anno</em> (inverno)</small></span></label>
 <label class="feature-card"><input type="checkbox" name="feature" value="tv" data-saving="40"><span class="feature-text"><strong>Spegnere TV/decoder in standby</strong><small>Risparmio stimato: <em>€40/anno</em></small></span></label>
 <label class="feature-card"><input type="checkbox" name="feature" value="voce" data-saving="0"><span class="feature-text"><strong>Comando vocale Alexa/Google Home</strong><small>Comfort aggiunto</small></span></label>
 <label class="feature-card"><input type="checkbox" name="feature" value="remoto" data-saving="0"><span class="feature-text"><strong>Controllo remoto da app</strong><small>Gestione da ovunque</small></span></label>
@@ -138,19 +137,60 @@
 </div>
 <div class="step-nav">
 <button type="button" class="btn-outline" onclick="goToStep(2)">← Indietro</button>
-<button type="button" class="btn-secondary" onclick="goToStep(4)" id="btnNext3">Avanti →</button>
+<button type="button" class="btn-secondary" onclick="goToStep(4)" id="btnNext3">Vedi il tuo kit →</button>
 </div>
 </div>
 
 <div class="step" data-step="4">
-<h3 class="step-title">4. Ricevi il tuo preventivo</h3>
-<p class="step-subtitle">Lascia i tuoi contatti per ricevere il preventivo personalizzato gratuito.</p>
+<h3 class="step-title">4. Il tuo kit ideale</h3>
+<p class="step-subtitle">Basato sulle tue scelte, ecco il kit che ti consigliamo. Puoi confermare o scegliere un'opzione diversa.</p>
+
+<div id="kitCards" class="kit-cards-container"></div>
+
+<div class="roi-box">
+<div class="roi-header">Riepilogo del tuo investimento</div>
+<div class="roi-content">
+<div class="roi-item">
+<span class="roi-label">Kit selezionato</span>
+<span class="roi-value" id="roiKitNome">—</span>
+</div>
+<div class="roi-item">
+<span class="roi-label">Costo</span>
+<span class="roi-value" id="roiPrezzo">—</span>
+</div>
+<div class="roi-item">
+<span class="roi-label">Risparmio stimato</span>
+<span class="roi-value roi-highlight" id="roiRisparmio">—</span>
+</div>
+<div class="roi-item">
+<span class="roi-label">Si ripaga in</span>
+<span class="roi-value roi-highlight" id="roiMesi">—</span>
+</div>
+</div>
+</div>
+
+<div class="step-nav">
+<button type="button" class="btn-outline" onclick="goToStep(3)">← Indietro</button>
+<button type="button" class="btn-secondary" onclick="goToStep(5)">Procedi alla richiesta →</button>
+</div>
+</div>
+
+<div class="step" data-step="5">
+<h3 class="step-title">5. Invia la tua richiesta</h3>
+<p class="step-subtitle">Lascia i tuoi contatti per ricevere la proposta dettagliata via email entro 24 ore.</p>
+
+<div class="kit-riepilogo-form">
+<strong>Kit scelto:</strong> <span id="riepilogoKit">—</span>
+</div>
+
 <form id="leadForm" action="https://formspree.io/f/xpqbnbnw" method="POST">
-<input type="hidden" name="_subject" value="Nuova richiesta preventivo ebuing">
+<input type="hidden" name="_subject" value="Nuova richiesta kit ebuing">
 <input type="hidden" name="tipo_cliente" id="hiddenTipo">
 <input type="hidden" name="dimensione" id="hiddenDimensione">
 <input type="hidden" name="funzionalita" id="hiddenFeatures">
 <input type="hidden" name="risparmio_stimato" id="hiddenSaving">
+<input type="hidden" name="kit_scelto" id="hiddenKit">
+<input type="hidden" name="kit_prezzo" id="hiddenKitPrezzo">
 
 <div class="form-row"><label for="nome">Nome e cognome *</label><input type="text" id="nome" name="nome" required></div>
 <div class="form-row"><label for="email">Email *</label><input type="email" id="email" name="email" required></div>
@@ -160,20 +200,23 @@
 
 <label class="checkbox-row">
 <input type="checkbox" name="consenso" required>
-<span>Acconsento al trattamento dei miei dati personali per ricevere il preventivo e comunicazioni relative al lancio del kit. Leggi la <a href="privacy.html" target="_blank">Privacy Policy</a>.</span>
+<span>Acconsento al trattamento dei miei dati personali per ricevere la proposta e comunicazioni relative al lancio del kit. Leggi la <a href="privacy.html" target="_blank">Privacy Policy</a>.</span>
 </label>
 
+<p class="info-richiesta">Questa è una <strong>richiesta di proposta</strong>, non un ordine vincolante. Riceverai via email i dettagli del kit, IBAN per il bonifico e tempi di consegna. Procederai con l'acquisto solo dopo la tua conferma esplicita.</p>
+
 <div class="step-nav">
-<button type="button" class="btn-outline" onclick="goToStep(3)">← Indietro</button>
-<button type="submit" class="btn-primary">Richiedi preventivo gratuito</button>
+<button type="button" class="btn-outline" onclick="goToStep(4)">← Indietro</button>
+<button type="submit" class="btn-primary">Invia richiesta</button>
 </div>
 </form>
 </div>
 
-<div class="step thank-you" data-step="5">
+<div class="step thank-you" data-step="6">
 <div class="thank-you-icon">✓</div>
 <h3>Grazie!</h3>
-<p>Abbiamo ricevuto la tua richiesta. Stiamo preparando il tuo preventivo personalizzato e te lo invieremo via email entro 48 ore.</p>
+<p>Abbiamo ricevuto la tua richiesta. Stiamo preparando la proposta dettagliata e te la invieremo via email entro 24 ore.</p>
+<p>Riceverai: riepilogo kit, prezzo finale, IBAN per il bonifico, tempi di consegna.</p>
 <p>Per qualsiasi domanda, scrivici a <a href="mailto:info@ebuing.it">info@ebuing.it</a></p>
 <p id="countdownMsg" style="margin-top: 32px; color: var(--grigio-scuro); font-size: 0.95rem;">Hai più appartamenti? Potrai fare una nuova richiesta tra <strong id="countdownNumber" style="color: var(--verde);">10</strong> secondi.</p>
 <button type="button" id="newRequestBtn" onclick="resetConfigurator()" class="btn-primary" style="display: none; margin-top: 24px;">+ Fai un'altra richiesta</button>
@@ -188,8 +231,8 @@
 <h2 class="section-title">Come funziona</h2>
 <div class="how-grid">
 <div class="how-step"><div class="how-number">1</div><h3>Configuri</h3><p>Rispondi alle domande del configuratore. Bastano 2 minuti.</p></div>
-<div class="how-step"><div class="how-number">2</div><h3>Ricevi preventivo</h3><p>Ti inviamo un preventivo personalizzato gratuito via email entro 48 ore.</p></div>
-<div class="how-step"><div class="how-number">3</div><h3>Ricevi il kit</h3><p>Se decidi di procedere, ti spediamo il kit completo a casa.</p></div>
+<div class="how-step"><div class="how-number">2</div><h3>Ricevi proposta</h3><p>Ti inviamo la proposta dettagliata via email entro 24 ore con IBAN per il bonifico.</p></div>
+<div class="how-step"><div class="how-number">3</div><h3>Ricevi il kit</h3><p>Dopo il bonifico, prepariamo e spediamo il kit. Consegna in 5-10 giorni.</p></div>
 </div>
 </div>
 </section>
@@ -199,19 +242,19 @@
 <h2 class="section-title">Domande frequenti</h2>
 <div class="faq-list">
 
-<details class="faq-item"><summary>Devo pagare per ricevere il preventivo?</summary><p>No. Il preventivo è completamente gratuito e senza impegno di acquisto. Vogliamo prima capire quale kit è giusto per te.</p></details>
+<details class="faq-item"><summary>Quando invio la richiesta, sto comprando?</summary><p>No. L'invio della richiesta è una manifestazione di interesse senza impegno. Riceverai via email la proposta dettagliata con prezzo, IBAN per il bonifico e tempi. L'ordine si perfeziona solo dopo che hai fatto il bonifico bancario.</p></details>
 
 <details class="faq-item"><summary>Quanto tempo serve per installare il kit?</summary><p>L'installazione del kit base richiede circa 30-45 minuti la prima volta. Forniamo guida cartacea italiana inclusa nella confezione e video tutorial online. Non serve elettricista per il kit base.</p></details>
 
 <details class="faq-item"><summary>Funziona con il mio condizionatore?</summary><p>Il kit funziona con condizionatori dotati di presa elettrica standard (portatili o split con presa esterna). Per split fissi senza presa esterna, l'hub centrale ha un trasmettitore IR integrato che può comandare i climatizzatori tramite telecomando.</p></details>
 
-<details class="faq-item"><summary>Posso espandere il kit in futuro?</summary><p>Sì, tutti i kit sono espandibili. Puoi aggiungere sensori, prese smart, lampadine smart e valvole termostatiche in qualsiasi momento. L'hub centrale supporta fino a 128 dispositivi.</p></details>
+<details class="faq-item"><summary>Posso espandere il kit in futuro?</summary><p>Sì, tutti i kit sono espandibili. Puoi aggiungere sensori, prese smart, lampadine smart in qualsiasi momento. L'hub centrale supporta fino a 128 dispositivi.</p></details>
 
-<details class="faq-item"><summary>Tempi e modalità di consegna?</summary><p>I prodotti vengono spediti da magazzino EU. La spedizione standard avviene in 5-15 giorni lavorativi. Per ordini sopra €100 la spedizione è gratuita.</p></details>
+<details class="faq-item"><summary>Tempi e modalità di consegna?</summary><p>Dopo aver ricevuto il bonifico, prepariamo e spediamo il kit. Consegna 5-10 giorni lavorativi tramite corriere. Spedizione gratuita inclusa nel prezzo.</p></details>
 
 <details class="faq-item"><summary>Posso rendere il prodotto se non sono soddisfatto?</summary><p>Sì, hai 14 giorni di diritto di recesso secondo la legge italiana. Se entro 14 giorni dalla consegna decidi di rendere il kit, ti rimborsiamo l'intero importo.</p></details>
 
-<details class="faq-item"><summary>Quanto è il risparmio reale?</summary><p>Il risparmio dipende dall'uso e dalle abitudini. I valori indicati nel configuratore sono basati su tariffe ARERA 2026 e consumi medi di appartamenti italiani. Su un appartamento Airbnb tipico, il kit base si ripaga in circa 2-3 mesi durante la stagione estiva.</p></details>
+<details class="faq-item"><summary>Quanto è il risparmio reale?</summary><p>Il risparmio dipende dall'uso e dalle abitudini. I valori indicati nel configuratore sono basati su tariffe ARERA 2026 e consumi medi di appartamenti italiani. Su un appartamento Airbnb tipico, il kit base si ripaga in circa 6-9 mesi durante la stagione estiva.</p></details>
 
 <details class="faq-item"><summary>Funziona con Alexa, Google Home, Apple HomeKit?</summary><p>Sì. Il kit è compatibile con tutti i principali assistenti vocali (Alexa, Google Home, Apple HomeKit, SmartThings). La configurazione richiede WiFi 2.4 GHz attivo nell'appartamento.</p></details>
 
