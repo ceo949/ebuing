@@ -47,10 +47,34 @@ function goToStep(step) {
   window.scrollTo({ top: document.getElementById('configuratore').offsetTop - 20, behavior: 'smooth' });
 }
 
+function resetConfigurator() {
+  document.querySelectorAll('input[name="tipo"]').forEach(i => i.checked = false);
+  document.querySelectorAll('input[name="dimensione"]').forEach(i => i.checked = false);
+  document.querySelectorAll('input[name="feature"]').forEach(i => i.checked = false);
+  
+  document.getElementById('leadForm').reset();
+  
+  document.getElementById('savingAmount').textContent = '€0';
+  
+  document.getElementById('btnNext1').disabled = true;
+  document.getElementById('btnNext2').disabled = true;
+  
+  const newRequestBtn = document.getElementById('newRequestBtn');
+  if (newRequestBtn) newRequestBtn.style.display = 'none';
+  
+  const countdownEl = document.getElementById('countdownMsg');
+  if (countdownEl) countdownEl.style.display = 'block';
+  
+  goToStep(1);
+}
+
 document.getElementById('leadForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   const form = e.target;
   const data = new FormData(form);
+  const submitBtn = form.querySelector('button[type="submit"]');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Invio in corso...';
   
   try {
     const response = await fetch(form.action, {
@@ -61,10 +85,35 @@ document.getElementById('leadForm').addEventListener('submit', async function(e)
     
     if (response.ok) {
       goToStep(5);
+      startCountdown();
     } else {
       alert('Si è verificato un errore. Riprova o scrivi direttamente a info@ebuing.it');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Richiedi preventivo gratuito';
     }
   } catch (error) {
     alert('Si è verificato un errore di connessione. Riprova o scrivi direttamente a info@ebuing.it');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Richiedi preventivo gratuito';
   }
 });
+
+function startCountdown() {
+  let seconds = 10;
+  const countdownEl = document.getElementById('countdownNumber');
+  const newRequestBtn = document.getElementById('newRequestBtn');
+  const countdownMsg = document.getElementById('countdownMsg');
+  
+  if (countdownEl) countdownEl.textContent = seconds;
+  
+  const interval = setInterval(() => {
+    seconds--;
+    if (countdownEl) countdownEl.textContent = seconds;
+    
+    if (seconds <= 0) {
+      clearInterval(interval);
+      if (countdownMsg) countdownMsg.style.display = 'none';
+      if (newRequestBtn) newRequestBtn.style.display = 'inline-block';
+    }
+  }, 1000);
+}
